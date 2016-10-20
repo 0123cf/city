@@ -78,7 +78,6 @@ var headStyleCityCssCalue=[
 '</style>'
 ].join('');
 document.querySelector("head").innerHTML+=headStyleCityCssCalue;
-console.log(headStyleCityCssCalue);
 function city(id){
 var content=['<div id="cityBox">',
 			'	<div id="box3">',
