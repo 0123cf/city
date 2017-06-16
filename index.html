@@ -2,13 +2,25 @@
   <head>
     <meta charset="utf-8" name="viewport" content=" initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <title>移动端3级城市选择</title>
+	<style>
+		#cityBox{width:100%;height:100%;background:rgba(0,0,0,.7);text-align:center;color:#999;cursor:pointer;-webkit-tap-highlight-color:transparent;z-index:999;position:absolute;top:0;left:0;background:rgba(0,0,0,.7)}
+#cityBox #l,#cityBox #r,#cityBox p,#cityBox span{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+#cityBox p{border-bottom:1px solid rgba(0,0,0,.04)}
+#cityBox #l,#cityBox #r{display:inline-block;width:46%;padding:.5em 0;color:#444}
+#cityBox #l{text-align:left}
+#cityBox #r{text-align:right}
+#cityBox #back{display:block;height:1.6em;border-top:1px solid rgba(255,80,70,.5);border-bottom:1px solid rgba(255,80,70,.5);position:relative;background:rgba(0,0,0,0);z-index:1000;top:1.7em}
+#cityBox #box3{width:100%;height:50%;background:#fff;overflow:hidden;position:absolute;bottom:0}
+#cityBox>div:after{display:block;clear:both}
+#cityBox>div>div{width:33.333%;float:left;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;position:relative;top:-1.7em;z-index:999999999}
+#cityBox #box3 span{position:relative;top:0;transition:top .3s}
+#cityBox #box3>div{position:relative;line-height:1.7em;padding:0}
+
+	</style>
   </head>
   <body>
-    <input id="value">
+    <input id="value" onclick="city(this)">
   </body>
   <script src="city.js"></script>
   <script src="main.js"></script>
-  <script>
-    city("value");
-  </script>
 </html>
