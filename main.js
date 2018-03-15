@@ -1,4 +1,6 @@
-function city(inputbox) {
+
+function city(inputbox, cityJson, callback) {
+    console.log(cityJson)
 	/**
 	 * get元素
 	 * @param {Object} a 元素
@@ -6,18 +8,19 @@ function city(inputbox) {
 	function _id(a){return document.getElementById(a)}
 	
 	// 单例添加dom
-	if(!city.htmlrunning)addDom();
+    // if(!city.htmlrunning)
+    addDom();
 	
-	// 开启元素
-	if(city.htmlrunning){
-		_id('cityBox').style.display = 'block';
-	}
+	// // 开启元素
+	// if(city.htmlrunning){
+	// 	_id('cityBox').style.display = 'block';
+	// }
 	
-	// 执行单例
-	city.htmlrunning = true;
-	/**
-	 * 单例添加Dom
-	 */
+	// // 执行单例
+	// city.htmlrunning = true;
+	// /**
+	//  * 单例添加Dom
+	//  */
 	function addDom(){
 		var content = [
 						'	<div id="box3">',
@@ -210,16 +213,21 @@ function city(inputbox) {
 	});
 	box.addEventListener("touchstart", function(e) { //提交数据
 		//e.stopPropagation();
-		var ev = e.target;
+        var ev = e.target;
+        var site
 		if (ev.id == "l") {
-			this.parentNode.style.display = "none";
+            setTimeout(function(){
+                document.body.removeChild(box.parentNode)
+            }.bind(this), 300)
+            
+            prevent('end')
+            callback(site)
 		}
 		if (ev.id == "r") {
-			var site = [
-			name1, name2, name3];
+			// var site = [name1, name2, name3];
+			site = name2 ? [name1, name2] : [name1];
 			if (site[0] == site[1]) {
-				//	site.shift();   
-				site[1] = ''
+                site = [name1];
 			}
 			
 			if (/input/ig.test(inputbox.tagName)) {
@@ -228,10 +236,32 @@ function city(inputbox) {
 				inputbox.innerText = site.join('-');
 			}
 			
-			box.parentNode.style.display = "none";
-		}
-	});
+                
+            setTimeout(function(){
+                document.body.removeChild(box.parentNode)
+            }, 300)
+            prevent('end')
+            callback(site)
+        }
+        
+        
+    })
+    
+
+    function preventDefaultEvent(ev) {
+        ev.preventDefault();
+    }
+    prevent('start')
+
+    function prevent(state){
+        if(state == "start"){
+            document.querySelector('body').addEventListener('touchmove', preventDefaultEvent, false)
+            document.getElementsByTagName('html')[0].style.overflowY= 'hidden';
+        }else if(state == "end"){
+            document.querySelector('body').removeEventListener('touchmove', preventDefaultEvent, false)
+            document.getElementsByTagName('html')[0].style.overflowY= 'auto';
+        }
+    }
 }
-document.querySelector('body').addEventListener('touchstart', function(ev) {
-	ev.preventDefault();
-}); //禁止露底	
+
+export default city
